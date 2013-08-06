@@ -42,15 +42,15 @@ echo '<?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 		<channel>
 		<title>Xdcc Mooo !</title>
-		<atom:link href="http://xdcc.mooo.com/rss.php?nick='.rawurlencode($bots[$i]['nick']).'" rel="self" type="application/rss+xml"/>
-		<link>http://xdcc.mooo.com</link>
+		<atom:link href="'.URL.'rss.php?nick='.rawurlencode($bots[$i]['nick']).'" rel="self" type="application/rss+xml"/>
+		<link>'.URL.'</link>
 		<description></description>
 		<language>en</language>';
 	for($j=0;isset($bots[$i]['packs'][1][$j]);$j++){
 echo '		<item>
-		<title>'.$bots[$i]['packs'][5][$j].'</title>
-		<link>irc://irc.recycled-irc.net/arcadian-project</link>
-		<guid>urn:uuid:'.md5(
+		<title>'.$bots[$i]['packs'][5][$j].'</title>'."\n";
+		echo '<link>'.URL.'?nick='.rawurlencode($bots[$i]['nick']).'</link>'."\n";
+		echo '<guid>urn:uuid:'.md5(
 	$bots[$i]['packs'][1][$j].
 	$bots[$i]['packs'][2][$j].
 	$bots[$i]['packs'][3][$j].
