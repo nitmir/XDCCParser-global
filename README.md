@@ -27,6 +27,9 @@ XDCC Parser v1.2 Global - Status: Beta. Please help test it by downloading the b
 
 Internet Explorer 7+, Firefox 3+, Opera 9.6+, Chrome, Safari 4, Midori, most modern browsers
 
+### Demo
+[here](http://xdcc-demo.genua.fr/parser/) (ipv6) or [here](http://xdcc-demo.genua.fr.ipv4.sixxs.org/parser/) (ipv4)
+
 ### Feedback/Bug Reports/Development
 
  * Visit our IRC channel at [#XDCCParser@irc.rizon.net](irc://irc.rizon.net/XDCCParser)
