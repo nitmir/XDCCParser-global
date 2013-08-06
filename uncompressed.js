@@ -64,6 +64,7 @@ function p() {
 	this.getLastName=function() {
 		var name = (this.lastType==1) ? "Search: " : "Bot: ";
 		name += this.lastValue;
+		name += (this.lastType!=1) ? ' [<a href="rss.php?nick='+this.lastValue+'">rss</a>]' : "";
 		return name;
 	};
 	this.getLastURI=function() {
