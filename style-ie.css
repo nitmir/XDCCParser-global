@@ -1,0 +1,11 @@
+html, body {
+	height: 100%;
+	overflow: auto;
+}
+.botlist {
+	position: absolute;
+}
+#searchdiv {
+	position: static;
+	margin-right: -5px;
+}

@@ -1,0 +1,27 @@
+1.2.0:
+- packlists no longer required on server - ftp and http(s) are now supported, as well as normal file paths.
+- packlists are now automatically refreshed
+- irc channel now configurable through core.php
+- #NEWS-style sidebar
+- shrunken js variables
+- skin changer
+- Admin Panel
+- restrictive .htaccess
+- group filtering
+- bookmarks
+- new skin - rain
+- all skins now come with an 'expanded' version
+- IE6 support dropped
+- minified rather than packed js
+
+1.1 revision 2:
+- no longer treating hyphens as spaces
+- small js reorganization
+- use REQUEST rather than POST in the example packlist updater
+- included Smarty
+
+1.1 revision 1:
+- fixed unchecked xcache method
+
+1.1 revision 0:
+- initial v1.1 release

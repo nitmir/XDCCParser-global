@@ -1,0 +1,35 @@
+Requirements:
+PHP5 (has not been tested with PHP4, but it should work)
+Smarty Template Engine
+A modern web browser - Internet Explorer 6 is _NOT_ supported
+Highly Recommended:
+XCache (will work without it, but will be noticeably slower if there are many packs.) 
+PHP CURL extension - without CURL, packlists served by dinoex's built in http server will not be downloaded correctly.
+Normal txt files on a proper webserver (apache, lighty, nginx, etc) and local txt files will still be fine.
+
+See your host for questions regarding the requirements.
+
+
+Instructions: 
+
+make sure templates_c and cache are chmoded to 777
+edit admin.php and change the user and password!
+visit admin.php to add and delete bots.
+access URIs can be http, https, ftp, or a file path.
+examples:
+http://yoursite.com/packlist.txt
+ftp://user:pass@yoursite.com/packlist.txt
+/home/xdcc/bot/packlist.txt
+
+to show only group specific packs, add a group filter in admin.php.
+please do not include opening and closing tags (e.g. [,]).
+example: onegroupnamehere
+multiple groups example: (groupnameone|groupnametwo|groupnamethree)
+WRONG: [durhuricanread]
+
+bookmarks:
+bookmarks can be added in the admin panel
+
+various other settings such as skin and irc channel can be found in core.php
+
+We want your feedback! Drop by #XDCCParser on irc.rizon.net to give feedback, submit bug reports, or request support.
