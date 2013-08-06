@@ -40,7 +40,7 @@ foreach($access as $file) {
 		}
 	}
 	$xdccList = str_replace( array( chr(2), chr(3), chr(16), chr(31), chr(13) ), "", $xdccList ); //remove irc formatting (or something <_<)
-	if(preg_match("/\s+\*\*\s+To\s+request\s+a\s+file,\s+type\s+\"\/msg\s+(.*?)\s+xdcc\s+send|get\s+#x\"\s+\*\*\s+\W/mi",$xdccList,$data['nick'])) {
+	if(preg_match("/\s+\*\*\s+(?:To|Pour)\s+(?:request|télécharger)\s+(?:a|un)\s+(?:file|fichier),\s+(?:type|tape)\s+\"\/msg\s+(.*?)\s+xdcc\s+send|get\s+#x\"\s+\*\*\s+\W/mi",$xdccList,$data['nick'])) {
 		$bot = array();
 		$match = $config['group'] ? ".*".str_replace( array("^",".","*","\\","+","?","\$"), array("\^","\.","\*","\\\\","\+","\?","\\\$"), $config['group'] ).".*" : ".*";
 		eval("preg_match_all(\"/#(\\d+)\\s+\\d+x\\s+\\[.*?(\\d+\\.?\\d+?)(\\D)\\]\\s+(\\d+\\.\\d+\\.\\d+\\s+\\d+:\\d+\\s+)?(".$match.")\\W/mi\",\$xdccList,\$bot['packs']);");
