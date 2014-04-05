@@ -1,5 +1,5 @@
 Requirements:
-PHP5 (has not been tested with PHP4, but it should work)
+PHP5
 Smarty Template Engine
 A modern web browser - Internet Explorer 6 is _NOT_ supported
 Highly Recommended:

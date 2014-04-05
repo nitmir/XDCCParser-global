@@ -8,26 +8,33 @@
 	<link rel="stylesheet" href="{$url}style-ie.css" type="text/css" />
 	<![endif]-->
 	<script type="text/javascript" src="{$url}packlist.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	{foreach from=$bots key=bot_id item=bot}
+	p.b[{$bot_id}]='{$bot.nick}';
+	{/foreach}
+	//]]>
+	</script>
 </head>
-<body onload="p.init('{$url}');{if $nick}p.nickPacks('{$nick}');{/if}">
+<body onload="p.init('{$url}');{if $botid}p.search_bot('{$botid}');{elseif $search}p.search();{elseif $page}p.page({$page});{/if}">
 <div class="botlist">
 <div id="botlist" style="padding:10px;">
-{if $display_sc}<h3>Skins</h3>
-<a href="javascript:p.setSkin(1);">dark</a><br />
-<a href="javascript:p.setSkin(3);">dark-expanded</a><br />
-<a href="javascript:p.setSkin(2);">light pink</a><br />
-<a href="javascript:p.setSkin(4);">light pink-expanded</a><br />
-<a href="javascript:p.setSkin(5);">rain</a><br />
-<a href="javascript:p.setSkin(6);">rain-expanded</a><br /><br />{/if}
+{if $pages}
+<h3>Pages</h3>
+{foreach from=$pages key=page_id item=page}
+<a href="#" onclick="p.fetch_page('{$page_id}');return false;">{$page.title}</a><br />
+{/foreach}
+<br />
+{/if}
 <h3>Bots</h3>
-{foreach from=$bots item=bot}
-<a href="javascript:p.nickPacks('{$bot.nick|replace:'\\':'\\\\'}');">{$bot.nick}</a><br />
+{foreach from=$bots key=bot_id item=bot}
+<a href="#" onclick="p.search_bot('{$bot_id}');return false;">{$bot.nick}</a><br />
 {/foreach}
 {if $bookmarks}
 <br />
 <h3>Bookmarks</h3>
 {foreach from=$bookmarks item=bookmark}
-<a href="javascript:document.getElementById('search').value='{$bookmark.1|escape:"quotes"|replace:'"':'&quot;'}';p.search();">{$bookmark.0}</a><br />
+<a href="#" onclick="p.search('{$bookmark.1|escape:"quotes"|replace:'"':'&quot;'}');return false;">{$bookmark.0}</a><br />
 {/foreach}{/if}
 </div>
 </div>
@@ -43,13 +50,13 @@
 				<form action="#" onsubmit="p.search();return false;">Search:&nbsp;&nbsp;<input type="text" name="search" id="search" class="search" style="width:220px;" {if $search}value="{$search|escape:'html'}" {/if}/>&nbsp;&nbsp;<input type="submit" class="search" value="search" style="width:40px;" />&nbsp;&nbsp;<span class="default">(<a href="#" onclick="p.getLastURI();">permalink</a>)</span></form>
 			</div>
 		</div>
-	<h2 id="listname">&nbsp;</h2>
+	<h2 id="maintitle">&nbsp;</h2>
 	</div>
-	<div id="listtable">
+	<div id="maincontent">
 		<h1>Javascript is required for this site.</h1>
 	</div>
-	<div class="content" align="center"><a href="javascript:p.goTop();">&#8593;&#8593;</a></div>
-	<div class="footer"><span class="default">Powered by </span><a href="http://xdccparser.is-fabulo.us/"><span class="default">XDCC Parser v1.2beta</span></a></div>
+	<div class="content" align="center"><a href="#" onclick="w.goTop(); return false;">&#8593;&#8593;</a></div>
+	<div class="footer"><span class="default">Powered by </span><a href="http://xdccparser.is-fabulo.us/"><span class="default">XDCC Parser v2.0pre</span></a></div>
 	<div id="status"><p><span class="loading">Searching...</span></p></div>
 </div>
 </div>

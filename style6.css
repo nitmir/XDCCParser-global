@@ -36,7 +36,7 @@ div.footer {
 	background-color: #e1e1e1;
 }
 div.content {
-	padding: 5px;
+	padding: 10px;
 }
 h1.name {
 	font: 20pt "Trebuchet MS";
@@ -155,14 +155,14 @@ th {
 #searchdiv {
 	position: relative;
 	top: 0px;
-	left: 5px;
+	left: 10px;
 	border:1px solid #535c64;
 	border-top:0px #e1e1e1 solid;
 	border-right:0px #e1e1e1 solid;
 	float:right;
 	width:400px;
 	background: #e1e1e1;
-	margin-top:-6px;
+	margin-top:-11px;
 	text-align:left;
 	padding:10px;
 }
@@ -174,9 +174,6 @@ th {
 .default {
 	color: #34393d;
 }
-#listtable {
+.listtable {
 	width: 100%;
-}
-#listname {
-	padding: 5px;
 }

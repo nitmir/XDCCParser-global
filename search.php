@@ -10,13 +10,19 @@
  * Foundation.
  *
  * @link http://xdccparser.is-fabulo.us/
- * @version 1.2.0
+ * @version 2.0
  * @author Alex 'xshadowfire' Yu <ayu@xshadowfire.net>
  * @author DrX
  * @copyright 2008-2009 Alex Yu and DrX
  */
 
-require_once 'core.php';
+if(!$_GET['t'] && !$_GET['n']) die(); // we need something to search aye?
+
+$start = microtime( true );
+
+require_once 'define.php';
+require_once 'xp_cache.class.php';
+error_reporting(1);
 header( "Expires: Mon, 20 Dec 1998 01:00:00 GMT" );
 header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
@@ -37,46 +43,67 @@ function simpleSearch($search) {
 	return explode(" ",$search);
 }
 
-$x = 0;
-$bots = xp_get("bots");
+$bots = xp_cache::get("botdb");
 
 $t = literalSearch( str_replace( '-"', '"-', stripslashes($_GET['t']) ) ); // dirty dirty dirty hack - flip -" so I don't have to properly parse it :D
-$b = array(); // our blacklist
+$blacklist = array(); // our blacklist
 
-if($_GET['nick']) foreach($bots as $key => &$bot) if($bot['nick'] != $_GET['nick']) unset($bots[$key]); // dirty hack - get rid of all bots that aren't the right one!
+// dirty dirty hack
+if($_GET['n']) {
+$bot = $bots[$_GET['n']];
+unset($bots);
+$bots[$_GET['n']] = $bot;
+}
 
 foreach($t as $key => $arg) {
 	if(!$arg) { // why are you empty?
 		unset($t[$key]);
 	} elseif($arg[0] == '-') { // let's blacklist some terms
-		$b[] = substr($arg,1);
+		$blacklist[] = substr($arg,1);
 		unset($t[$key]);
 	}
 }
 
-$match = preg_match("/.*?[a-f0-9]{7}.*?/i",$_GET['t']) ? 5 : 4; // crc or non crc search, 7 or more is a go
+$match = preg_match("/.*?[a-f0-9]{7}.*?/i",$_GET['t']) ? 3 : 4; // crc or non crc search, 7 or more is a go
 
-foreach($bots as &$bot) {
-	$xpacks = array();
-	$key = count($bot['packs']['1']);
-	for($i=0;$i<$key;$i++) {
+$buffer = array();
+echo "[";
+
+foreach($bots as $id => &$bot) {
+	$found = array();
+	$p = 0;
+	foreach( $bot[0] as $key => $pack ) {
 		foreach($t as $arg) {
-			if(!stristr($bot['packs'][$match][$i],$arg)) {
+			if(!stristr($bot[$match][$key],$arg)) {
 				continue 2;
 			}
 		}
-		foreach($b as $arg) {
-			if(stristr($bot['packs'][$match][$i],$arg) !== FALSE) {
+		foreach($blacklist as $arg) {
+			if(stristr($bot[$match][$key],$arg) !== FALSE) {
 				continue 2;
 			}
 		}
-		$xpacks[$bot['packs'][1][$i]]['number'] = $bot['packs'][1][$i];
-		$xpacks[$bot['packs'][1][$i]]['name'] = $bot['packs'][5][$i];
-		$xpacks[$bot['packs'][1][$i]]['size'] = $bot['packs'][2][$i];
+		$found[] = $key;
 	}
 
-	foreach($xpacks as $pack)
-		print("p.k[".$x++."] = {b:\"".$bot['nick']."\", n:".$pack['number'].", s:".$pack['size'].", f:\"".$pack['name']."\"};\n");
+	foreach( $found as $key ) {
+		$ago = time()-$bot[2][$key];
+		if( $ago < 60 ) {
+			$ago = $ago . "s ago";
+		} else if( $ago < 3600 ) {
+			$ago = floor($ago / 60) . "m ago";
+		} else if( $ago < 86400 ) {
+			$ago = floor( $ago / 3600 ) . "h " .floor( ( $ago % 3600 ) / 60 ) . "m ago";
+		} else if( $ago < 31557600 ) {
+			$ago = floor( $ago / 86400 ) . "d " . floor( ( $ago % 86400 ) / 3600 ). "h ago";
+		} else {
+			$ago = floor( $ago /  31557600) . "y " . floor( ( $ago % 31557600 ) / 86400 ). "d ago";
+		}
+		echo '['.$id.','.$bot[0][$key].','.$bot[1][$key].',"'.$bot[3][$key].'","'.$ago.'",'.$bot[2][$key].'],';
+	}
 
 }
+
+echo (microtime( true ) - $start) . "]";
+
 ?>

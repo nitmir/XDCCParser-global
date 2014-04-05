@@ -1,8 +1,8 @@
 {include file="adminheader.tpl"}
 		<h2>Bots</h2>
 		<ul class="forwards">
-{if $bots}{foreach from=$bots key=nick item=bot}
-			<li>{$nick} ( <a href="?do=editbot&bot={$nick}">edit</a> | <a href="?do=deletebot&bot={$nick}" onclick="return confirm('Are you sure you want to delete {$nick}?');">delete</a> )</li>
+{if $bots}{foreach from=$bots key=bot_id item=bot}
+			<li>{$bot.nick} ( <a href="?do=editbot&bot={$bot_id}">edit</a> | <a href="?do=deletebot&bot={$bot_id}" onclick="return confirm('Are you sure you want to delete {$bot.nick}?');">delete</a> )</li>
 {/foreach}
 {else}
 			<li>None</li>
@@ -18,6 +18,15 @@
 			<li>None</li>
 {/if}
 			<li><a href="?do=editbookmark">add new bookmark</a></li>
+		</ul>
+		<h2>Custom Pages</h2>
+		<ul class="forwards">
+{if $pages}{foreach from=$pages key=page_id item=page}
+			<li>{$page.title} ( <a href="?do=editpage&page_id={$page_id}">edit</a> | <a href="?do=deletepage&page_id={$page_id}" onclick="return confirm('Are you sure you want to delete the page \'{$page.title} ?');">delete</a> )</li>{/foreach}
+{else}
+			<li>None</li>
+{/if}
+			<li><a href="?do=editpage">add new custom page</a></li>
 		</ul>
 		<h2>Admin</h2>
 		<ul class="forwards">

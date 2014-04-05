@@ -1,0 +1,18 @@
+store settings in db
+user bookmarks
+//:done xml parsing
+group filter for xml
+//:done insert/delete/update
+//:done added time - from packlist if available, or just time of addition.
+gets, maybe?
+install script
+//:done logging
+//:done create a separate db optimized for each module
+nick: order:time,asc/desc search
+sort search results serverside
+reorder bookmarks, pages, bots
+rss feed :3
+index - suffix tree?
+//:half-done show only 500 results by default - should it keep showing all results when selected (sorting, etc) or should it make the user expand every flush? or on a per search basis? or yet another cookie?
+language?
+BETTER ORGANIZATION BAWWWW

@@ -35,7 +35,7 @@ div.footer {
 }
 div.content {
 	background-color: #111;
-	padding: 5px;
+	padding: 10px;
 }
 h1.name {
 	font: 20pt "Trebuchet MS";
@@ -163,14 +163,14 @@ tr.animeColumn {
 #searchdiv {
 	position:relative;
 	top: 0px;
-	left: 5px;
+	left: 10px;
 	border:1px solid #ccc;
 	border-top:0px #444 solid;
 	float:right;
 	border-right:0px;
 	width:410px;
 	background: #444;
-	margin-top:-6px;
+	margin-top:-11px;
 	color:#ffba27;
 	text-align:left;
 	padding:10px;
@@ -183,9 +183,6 @@ tr.animeColumn {
 .default {
 	color:#ccc;
 }
-#listtable {
+.listtable {
 	width: 100%;
-}
-#listname {
-	padding: 5px;
 }

@@ -1,0 +1,16 @@
+<script>
+setSkin=function(id) {
+	$('skin').href = "style"+id+".css";
+	var exdate=new Date();
+	exdate.setDate(exdate.getDate()+31);
+	document.cookie="skin"+"="+escape(id)+";expires="+exdate.toGMTString();
+}
+</script>
+<div class='content'>
+<a href="#" onclick="setSkin(1);">dark</a><br />
+<a href="#" onclick="setSkin(3);">dark-expanded</a><br />
+<a href="#" onclick="setSkin(2);">light pink</a><br />
+<a href="#" onclick="setSkin(4);">light pink-expanded</a><br />
+<a href="#" onclick="setSkin(5);">rain</a><br />
+<a href="#" onclick="setSkin(6);">rain-expanded</a><br />
+</div>
