@@ -29,7 +29,10 @@ $s->compile_dir =  "./templates_c";
 if(!URL) {
 	$uri = explode("/",$_SERVER['REQUEST_URI']);
 	array_pop($uri);
-	define('_URL', "http://".$_SERVER['SERVER_NAME'].implode("/",$uri)."/");
+	$_s = '';
+	if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '' && $_SERVER['HTTPS'] != 'off')
+		$_s = 's';
+	define('_URL', "http$_s://".$_SERVER['SERVER_NAME'].implode("/",$uri)."/");
 } else {
 	define('_URL', URL);
 }
